@@ -49,6 +49,34 @@ def getKarts(request):
 
 @api_view(['GET'])
 def getKart(request, pk):
-    karts = Kart.objects.get(id=pk)
-    serializer = KartSerializer(karts,many = False)
+    kart = Kart.objects.get(id=pk)
+    serializer = KartSerializer(kart,many = False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def createKart(request):
+    data = request.data
+
+    kart = Kart.objects.create(
+        body=data['body']
+    )
+    serializer = KartSerializer(kart, many = False)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateKart(request, pk):
+    data = request.data
+
+    kart = Kart.objects.get(id=pk)
+
+    serializer = KartSerializer(kart, data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteKart(request, pk):
+    kart = Kart.objects.get(id=pk)
+    kart.delete()
+    return Response('Borrado')
