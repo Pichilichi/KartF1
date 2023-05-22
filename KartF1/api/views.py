@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .serializers import KartSerializer
+from .models import Kart
 # Create your views here.
 
 @api_view(['GET'])
@@ -37,5 +39,16 @@ def getRoutes(request):
             'description' : 'Delete a kart'
         },
     ]
-
     return Response(routes)
+
+@api_view(['GET'])
+def getKarts(request):
+    karts = Kart.objects.all()
+    serializer = KartSerializer(karts,many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getKart(request, pk):
+    karts = Kart.objects.get(id=pk)
+    serializer = KartSerializer(karts,many = False)
+    return Response(serializer.data)
