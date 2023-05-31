@@ -74,6 +74,7 @@ class Equipment(models.Model):
 # class Ranking(models.Model):
 	
 class Booking(models.Model): 
+    name = models.CharField(max_length=255) 
     raceDay = models.DateField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
