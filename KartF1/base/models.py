@@ -81,6 +81,9 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-updated', '-created']
+
     def __str__(self):
             return self.name
 

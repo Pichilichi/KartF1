@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Booking
 from .forms import BookingForm
@@ -15,5 +15,25 @@ def booking(request, pk):
 
 def createBooking(request):
     form = BookingForm()
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'booking_form.html',context)
+
+def updateBooking(request,pk):
+    booking = Booking.objects.get(id=pk)
+    form = BookingForm(instance=booking)
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
     context = {'form': form}
     return render(request, 'booking_form.html',context)

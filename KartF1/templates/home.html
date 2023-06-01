@@ -14,6 +14,7 @@
         {% for booking in bookings %}
 
         <div>
+            <a href="{% url 'update-booking' booking.id %}">Edit room</a>
             <span>{{booking.user.username}}</span>
             <h5>{{booking.id}} -- <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a></h5>
             <small>{{booking.circuit.name}}</small>
