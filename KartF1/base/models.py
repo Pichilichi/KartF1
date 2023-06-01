@@ -80,6 +80,7 @@ class Booking(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
+    #category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['-updated', '-created']

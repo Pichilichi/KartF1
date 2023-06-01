@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Booking,Category
+from django.db.models import Q
+from .models import Booking,Circuit
 from .forms import BookingForm
 
 def home(request):
-    bookings = Booking.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    categories = Category.objects.all()
+    bookings = Booking.objects.filter(Q(circuit__name__icontains=q) |
+    Q(name__icontains=q) | Q(user__username__icontains=q))
 
-    context = {'bookings': bookings, 'categories': categories}
+    circuits = Circuit.objects.all()
+    booking_count = bookings.count()
+
+    context = {'bookings': bookings, 'circuits': circuits, 'booking_count': booking_count}
     return render(request, 'home.html', context)
 
 def booking(request, pk):

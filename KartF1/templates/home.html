@@ -15,16 +15,20 @@
         <h3>Browser</h3>
         <hr>
 
-        {% for category in categories %}
             <div>
-                <a href="{% url 'home' %}?q={{category.name}}">{{category.name}}</a>
+                <a href="{% url 'home' %}">All</a>
+            </div>
+
+        {% for circuit in circuits %}
+            <div>
+                <a href="{% url 'home' %}?q={{circuit.name}}">{{circuit.name}}</a>
             </div>
         {% endfor %}
 
     </div>
 
     <div>
-
+        <h5>{{booking_count}} bookings!</h5>
         <a href="{% url 'create-booking' %}">Create room</a>
 
         <div>
