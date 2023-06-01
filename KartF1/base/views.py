@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Booking
+from .forms import BookingForm
 
 def home(request):
     bookings = Booking.objects.all()
@@ -13,5 +14,6 @@ def booking(request, pk):
     return render(request, 'booking.html', context)
 
 def createBooking(request):
-    context = {}
+    form = BookingForm()
+    context = {'form': form}
     return render(request, 'booking_form.html',context)
