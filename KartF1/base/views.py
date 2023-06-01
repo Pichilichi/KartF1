@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Q
-from .models import Booking,Circuit
+from .models import Booking,Circuit,User
+from django.contrib.auth import authenticate,login,logout
 from .forms import BookingForm
+from django.contrib import messages
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -54,3 +56,25 @@ def deleteBooking(request,pk):
         return redirect('home')
     
     return render(request, 'delete.html', {'obj':booking})
+
+def loginPage(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username or password does not exist')
+
+    context = {}
+    return render(request, 'login_register.html', context)
