@@ -4,4 +4,25 @@
 
 <h1> home template </h1>  
 
+
+<div>
+
+    <div>
+
+        <a href="{% url 'create-booking' %}">Create room</a>
+
+        {% for booking in bookings %}
+
+        <div>
+            <span>{{booking.user.username}}</span>
+            <h5>{{booking.id}} -- <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a></h5>
+            <small>{{booking.circuit.name}}</small>
+            <hr>
+        </div>
+
+        {% endfor %}
+    </div>
+
+</div>
+
 {% endblock content  %}
