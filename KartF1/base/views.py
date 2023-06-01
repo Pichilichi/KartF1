@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Booking
+from .models import Booking,Category
 from .forms import BookingForm
 
 def home(request):
     bookings = Booking.objects.all()
-    context = {'bookings': bookings}
+
+    categories = Category.objects.all()
+
+    context = {'bookings': bookings, 'categories': categories}
     return render(request, 'home.html', context)
 
 def booking(request, pk):

@@ -2,27 +2,48 @@
 
 {% block content %}
 
-<h1> home template </h1>  
+<style>
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr;   
+    }
+</style>
 
+<div class="home-container">
 
-<div>
+    <div>
+        <h3>Browser</h3>
+        <hr>
+
+        {% for category in categories %}
+            <div>
+                <a href="{% url 'home' %}?q={{category.name}}">{{category.name}}</a>
+            </div>
+        {% endfor %}
+
+    </div>
 
     <div>
 
         <a href="{% url 'create-booking' %}">Create room</a>
 
-        {% for booking in bookings %}
-
         <div>
-            <a href="{% url 'update-booking' booking.id %}">Edit room</a>
-            <a href="{% url 'delete-booking' booking.id %}"> Delete </a>
-            <span>{{booking.user.username}}</span>
-            <h5>{{booking.id}} -- <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a></h5>
-            <small>{{booking.circuit.name}} - {{booking.circuit.category}}</small>
-            <hr>
+
+            {% for booking in bookings %}
+
+            <div>
+                <a href="{% url 'update-booking' booking.id %}">Edit room</a>
+                <a href="{% url 'delete-booking' booking.id %}"> Delete </a>
+                <span>{{booking.user.username}}</span>
+                <h5>{{booking.id}} -- <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a></h5>
+                <small>{{booking.circuit.name}} - {{booking.circuit.category}}</small>
+                <hr>
+            </div>
+
+            {% endfor %}
+
         </div>
 
-        {% endfor %}
     </div>
 
 </div>
