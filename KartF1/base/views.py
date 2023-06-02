@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponse
 from .models import Booking,Circuit,User
 from django.contrib.auth import authenticate,login,logout
+# from django.contrib.auth.models import User
 from .forms import BookingForm
 from django.contrib import messages
 
@@ -23,6 +26,7 @@ def booking(request, pk):
     context = {'booking': booking}
     return render(request, 'booking.html', context)
 
+@login_required(login_url='login')
 def createBooking(request):
     form = BookingForm()
 
@@ -35,9 +39,13 @@ def createBooking(request):
     context = {'form': form}
     return render(request, 'booking_form.html',context)
 
+@login_required(login_url='login')
 def updateBooking(request,pk):
     booking = Booking.objects.get(id=pk)
     form = BookingForm(instance=booking)
+
+    if request.user != booking.user:
+        return HttpResponse('Not allowed')
 
     if request.method == 'POST':
         form = BookingForm(request.POST, instance=booking)
@@ -48,16 +56,23 @@ def updateBooking(request,pk):
     context = {'form': form}
     return render(request, 'booking_form.html',context)
 
+@login_required(login_url='login')
 def deleteBooking(request,pk):
     booking = Booking.objects.get(id=pk)
+
+    if request.user != booking.user:
+        return HttpResponse('Not allowed')
 
     if request.method == 'POST':
         booking.delete()
         return redirect('home')
-    
+   
     return render(request, 'delete.html', {'obj':booking})
 
 def loginPage(request):
+    page = 'login'
+    if request.user.is_authenticated:
+        return redirect('home')
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -76,9 +91,13 @@ def loginPage(request):
         else:
             messages.error(request, 'Username or password does not exist')
 
-    context = {}
+    context = {'page': page}
     return render(request, 'login_register.html', context)
 
 def logoutUser(request):
     logout(request)
     return redirect('home')
+
+def registerPage(request):
+    page = 'register'
+    return render(request, 'login_register.html')
