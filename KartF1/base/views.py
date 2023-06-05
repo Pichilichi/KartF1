@@ -44,7 +44,11 @@ def booking(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user': user}
+    bookings = user.booking_set.all()
+    booking_messages = user.message_set.all()
+    circuits = Circuit.objects.all()
+    context = {'user': user, 'bookings':bookings,
+    'booking_messages': booking_messages, 'circuits': circuits }
     return render(request, 'profile.html', context)
 
 @login_required(login_url='login')
