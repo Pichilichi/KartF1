@@ -42,6 +42,11 @@ def booking(request, pk):
     'racers' : racers}
     return render(request, 'booking.html', context)
 
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    context = {'user': user}
+    return render(request, 'profile.html', context)
+
 @login_required(login_url='login')
 def createBooking(request):
     form = BookingForm()
