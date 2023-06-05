@@ -18,8 +18,10 @@ def home(request):
 
     circuits = Circuit.objects.all()
     booking_count = bookings.count()
+    booking_messages = Message.objects.all()
 
-    context = {'bookings': bookings, 'circuits': circuits, 'booking_count': booking_count}
+    context = {'bookings': bookings, 'circuits': circuits, 
+    'booking_count': booking_count, 'booking_messages': booking_messages}
     return render(request, 'home.html', context)
 
 def booking(request, pk):

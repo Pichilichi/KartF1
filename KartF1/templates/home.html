@@ -5,7 +5,7 @@
 <style>
     .home-container {
         display: grid;
-        grid-template-columns: 1fr 3fr;  
+        grid-template-columns: 1fr 3fr 1fr;  
     }
 </style>
 
@@ -29,7 +29,7 @@
 
     <div>
         <h5>{{booking_count}} bookings!</h5>
-        <a href="{% url 'create-booking' %}">Create room</a>
+        <a href="{% url 'create-booking' %}">Create booking</a>
 
         <div>
 
@@ -38,7 +38,7 @@
             <div>
                
                 {% if request.user == booking.user %}
-                <a href="{% url 'update-booking' booking.id %}">Edit room</a>
+                <a href="{% url 'update-booking' booking.id %}">Edit booking</a>
                 <a href="{% url 'delete-booking' booking.id %}"> Delete </a>
                 {% endif %}
 
@@ -52,6 +52,16 @@
 
         </div>
 
+    </div>
+
+    <div>
+        <h3>Recent Activity</h3>
+        <hr>
+        {% for message in booking_messages %}
+            <div>
+                <small>{{message.user}} {{message.created|timesince}} </small>
+            </div>
+        {% endfor %}
     </div>
 
 </div>
