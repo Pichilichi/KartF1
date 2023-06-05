@@ -25,6 +25,7 @@ def home(request):
 def booking(request, pk):
     booking = Booking.objects.get(id=pk)
     booking_messages = booking.message_set.all().order_by('-created')
+    racers = booking.racers.all()
 
     if request.method == 'POST':
         message = Message.objects.create(
@@ -34,7 +35,8 @@ def booking(request, pk):
         )
         return redirect('booking', pk=booking.id)
 
-    context = {'booking': booking, 'booking_messages': booking_messages}
+    context = {'booking': booking, 'booking_messages': booking_messages, 
+    'racers' : racers}
     return render(request, 'booking.html', context)
 
 @login_required(login_url='login')

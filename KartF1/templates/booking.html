@@ -2,30 +2,55 @@
 
 {% block content %}
 
-<h1> Booking: {{booking.name}} </h1>  
+<style>
+    .booking-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
 
-<p> Race day: {{booking.raceDay}} </p>
+<div class="booking-container">
 
-<div class="comment-wrapper"> 
-    <h3>Convo</h3>
-    <hr>
-
-    {% for message in booking_messages %}
     <div>
-        <small>{{message.user}} {{message.created|timesince}} ago</small>
-        <p>{{message.body}}</p>
-        <hr>
+    
+        <h1> Booking: {{booking.name}} </h1>  
+
+        <p> Race day: {{booking.raceDay}} </p>
+
+        <div class="comment-wrapper"> 
+            <h3>Convo</h3>
+            <hr>
+
+            {% for message in booking_messages %}
+            <div>
+                <small>{{message.user}} {{message.created|timesince}} ago</small>
+                <p>{{message.body}}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" name="body" placeholder="Say something!"/>
+            </form>
+        </div>
+        {% endif %}
+
     </div>
-    {% endfor %}
-</div>
 
-{% if request.user.is_authenticated %}
-<div class="comment-form">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <input type="text" name="body" placeholder="Say something!"/>
-    </form>
-</div>
-{% endif %}
+    <div>
+        <h3>Racers</h3>
+        <hr>
 
+        {% for user in racers %}
+        <div>
+            <p>{{user.username}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock content  %}
