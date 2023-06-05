@@ -18,28 +18,8 @@
     <div>
         <h5>{{booking_count}} bookings!</h5>
         <a href="{% url 'create-booking' %}">Create booking</a>
-
-        <div>
-
-            {% for booking in bookings %}
-
-            <div>
-               
-                {% if request.user == booking.user %}
-                <a href="{% url 'update-booking' booking.id %}">Edit booking</a>
-                <a href="{% url 'delete-booking' booking.id %}"> Delete </a>
-                {% endif %}
-
-                <span>{{booking.user.username}}</span>
-                <h5>{{booking.id}} -- <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a></h5>
-                <small>{{booking.circuit.name}} - {{booking.circuit.category}}</small>
-                <hr>
-            </div>
-
-            {% endfor %}
-
-        </div>
-
+        
+        {% include 'booking_component.html' %}
     </div>
 
     <div>
