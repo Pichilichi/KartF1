@@ -81,6 +81,7 @@ class Booking(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
+    racers = models.ManyToManyField(User, related_name='racers', blank=True)
     #category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     # class Meta:
