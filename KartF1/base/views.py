@@ -33,6 +33,7 @@ def booking(request, pk):
             booking=booking,
             body=request.POST.get('body')
         )
+        booking.racers.add(request.user)
         return redirect('booking', pk=booking.id)
 
     context = {'booking': booking, 'booking_messages': booking_messages, 
@@ -126,3 +127,17 @@ def registerPage(request):
             messages.error(request, 'An error occured during registration')
 
     return render(request, 'login_register.html', {'form': form})
+
+@login_required(login_url='login')
+def deleteMessage(request,pk):
+    message = Message.objects.get(id=pk)
+
+    if request.user != message.user:
+        return HttpResponse('Not allowed')
+
+    if request.method == 'POST':
+        message.delete()
+        return redirect('home')
+   
+    return render(request, 'delete.html', {'obj':message})
+
