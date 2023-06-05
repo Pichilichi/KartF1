@@ -2,6 +2,20 @@
 
 {% block content %}
 
-<h1> {{booking.name}} </h1>  
+<h1> Booking: {{booking.name}} </h1>  
+
+<p> Race day: {{booking.raceDay}} </p>
+
+<div class="comment-wrapper"> 
+    <h3>Convo</h3>
+    <hr>
+
+    {% for message in messages%}
+    <div>
+        <small>{{message.user}} {{message.created}}</small>
+    </div>
+    {% endfor %}
+
+</div>
 
 {% endblock content  %}

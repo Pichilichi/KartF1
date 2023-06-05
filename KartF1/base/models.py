@@ -24,6 +24,7 @@ class Kart(models.Model):
     photo = models.ImageField(upload_to="cars") 
     cc = models.IntegerField()
     color = models.CharField(max_length=255)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, default='1')
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -82,10 +83,19 @@ class Booking(models.Model):
     circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
     #category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
-    class Meta:
-        ordering = ['-updated', '-created']
+    # class Meta:
+    #     ordering = ['-updated', '-created']
 
     def __str__(self):
             return self.name
 
 
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+            return self.body[0:50]

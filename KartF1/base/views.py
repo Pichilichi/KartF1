@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
-from .models import Booking,Circuit,User
+from .models import Booking,Circuit,Message,User
 from django.contrib.auth import authenticate,login,logout
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -24,7 +24,8 @@ def home(request):
 
 def booking(request, pk):
     booking = Booking.objects.get(id=pk)
-    context = {'booking': booking}
+    messages = booking.message_set.all()
+    context = {'booking': booking, 'messages': messages}
     return render(request, 'booking.html', context)
 
 @login_required(login_url='login')
