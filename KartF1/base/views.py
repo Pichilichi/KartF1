@@ -11,6 +11,7 @@ from .forms import BookingForm
 from django.contrib import messages
 
 def home(request):
+    page = 'home'
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     bookings = Booking.objects.filter(Q(circuit__name__icontains=q) |
@@ -21,7 +22,8 @@ def home(request):
     booking_messages = Message.objects.filter(Q(booking__circuit__name__icontains=q))
 
     context = {'bookings': bookings, 'circuits': circuits, 
-    'booking_count': booking_count, 'booking_messages': booking_messages}
+    'booking_count': booking_count, 'booking_messages': booking_messages,
+    'page' : page}
     return render(request, 'home.html', context)
 
 def booking(request, pk):
