@@ -155,3 +155,6 @@ def deleteMessage(request,pk):
    
     return render(request, 'delete.html', {'obj':message})
 
+def index(request):
+    return render(request, 'index.html')
+
