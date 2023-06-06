@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 
 class Kart(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="cars") 
+    photo = models.ImageField(upload_to="static/images/cars") 
     cc = models.IntegerField()
     color = models.CharField(max_length=255)
     user =  models.ForeignKey(User, on_delete=models.CASCADE, default='1')
@@ -39,7 +39,7 @@ class Category(models.Model):
      
 class Circuit(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="cars") 
+    photo = models.ImageField(upload_to="static/images/cars") 
     year = models.DateField()
     km = models.CharField(max_length=255)
     body = models.TextField()
@@ -52,7 +52,7 @@ class Circuit(models.Model):
 
 class Equipment(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="cars") 
+    photo = models.ImageField(upload_to="static/images/cars") 
     HELMET = "HM"
     RACESUIT = "RS"
     GLOVES = "GL"
