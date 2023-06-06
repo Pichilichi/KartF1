@@ -24,8 +24,11 @@
         </div>
 
         <div>
-            <h5>{{booking_count}} bookings!</h5>
-            <a href="{% url 'create-booking' %}">Create booking</a>
+            <ul class="navbar-nav ms-auto">
+                <p class="masthead-subheading font-weight-light mb-0"><h5>{{booking_count}} bookings!</h5> 
+                <a class="btn btn-outline-light btn-social mx-1" href="{% url 'create-booking' %}">Create booking</a></p>
+            </ul>
+            
             
             {% include 'booking_component.html' %}
         </div>
