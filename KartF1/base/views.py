@@ -26,6 +26,7 @@ def home(request):
     'page' : page}
     return render(request, 'home.html', context)
 
+@login_required(login_url='login')
 def booking(request, pk):
     booking = Booking.objects.get(id=pk)
     booking_messages = booking.message_set.all().order_by('-created')
@@ -43,6 +44,24 @@ def booking(request, pk):
     context = {'booking': booking, 'booking_messages': booking_messages, 
     'racers' : racers}
     return render(request, 'booking.html', context)
+
+@login_required(login_url='login')
+def circuit(request):
+    circuits = Circuit.objects.all()
+    # booking_messages = booking.message_set.all().order_by('-created')
+    # racers = booking.racers.all()
+
+    # if request.method == 'POST':
+    #     message = Message.objects.create(
+    #         user=request.user,
+    #         booking=booking,
+    #         body=request.POST.get('body')
+    #     )
+    #     booking.racers.add(request.user)
+    #     return redirect('booking', pk=booking.id)
+
+    context = {'circuits': circuits}
+    return render(request, 'circuit.html', context)
 
 @login_required(login_url='login')
 def userProfile(request, pk):

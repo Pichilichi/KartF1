@@ -26,8 +26,6 @@
             <p> Race day: {{booking.raceDay}} </p>
 
             <div class="comment-wrapper"> 
-                <h3>Convo</h3>
-                <hr>
 
                 {% for message in booking_messages %}
                 <div>
@@ -52,13 +50,13 @@
 
         </div>
 
-        <div>
-            <h3>Racers</h3>
+        <div class="footer">
+            <h3 class="text-uppercase mb-4">Racers</h3>
             <hr>
 
             {% for user in racers %}
             <div>
-                <p>{{user.username}}</p>
+                <p class="lead mb-0">{{user.username}}</p>
             </div>
             {% endfor %}
         </div>
