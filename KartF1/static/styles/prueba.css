@@ -11067,6 +11067,10 @@ html {
   color: black
 }
 
+.textitowhite{
+  color: white
+}
+
 /* .footer .footer-activity {
   border-radius: 25px;
   padding-left: 2rem;
@@ -11081,4 +11085,28 @@ html {
 
 .copyright {
   background-color: #1a252f;
+}
+
+.card {
+  color: white;
+  width: 30rem;
+  padding: 30px;
+  background-color: #2c3e50;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+}
+
+.card input {
+  font-size: 25px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.card p {
+  font-size: 20px;
+  color: white;
 }
