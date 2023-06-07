@@ -52,7 +52,7 @@ class Circuit(models.Model):
 
 class Equipment(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="static/images/cars") 
+    photo = models.ImageField(upload_to="static/images/equipment") 
     HELMET = "HM"
     RACESUIT = "RS"
     GLOVES = "GL"

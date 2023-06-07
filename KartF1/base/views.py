@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
-from .models import Booking,Circuit,Message,User
+from .models import Booking,Circuit, Equipment,Message,User
 from django.contrib.auth import authenticate,login,logout
 # from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -62,6 +62,12 @@ def circuit(request):
 
     context = {'circuits': circuits}
     return render(request, 'circuit.html', context)
+
+def equipment(request):
+    equipments = Equipment.objects.all()
+    
+    context = {'equipments': equipments}
+    return render(request, 'equipment.html', context)
 
 @login_required(login_url='login')
 def userProfile(request, pk):

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    {% extends 'main.html' %}
+
+    {% load static %}
+
+    {% block content %}
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/prueba.css' %}">
+    <style>
+    </style>
+
+    
+    <body>
+        <div class="booking-container">
+
+            {% comment %} {% for circuit in circuits %}
+
+            <div>
+                <div>
+                    <div>
+                        <section class="page-section portfolio" id="portfolio">
+                            <div class="container">
+                                <!-- NAME - CIRCUIT+CATEGORY - CAR - THE USER -->
+                                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
+                                    <a href="{% url 'home' %}"> {{circuit.name}} </a>
+                                </h2>
+                                <h6 class="page-section-heading-circuit text-center text-uppercase text-secondary mb-0">-{{circuit.km}}km - {{circuit.category}}-</h6>
+                                <!-- THE CAR WORKS AS A DIVISION -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-car-on"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <h5 class="page-section-heading-user text-center text-uppercase text-secondary mb-0"> 
+                                    <a href="{% url 'home' %}"> {{circuit.body}}</a>
+                                </h5>
+                            </div>
+                        </section>
+                    </div>
+                </div>        
+            </div>
+
+            {% endfor %} {% endcomment %}
+
+            
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for eq in equipments %}
+                <div class="col">
+                    <div class="card">
+                        <img class="card-img-top" src={{eq.photo.url}} alt="imagen">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase mb-0">{{eq.name}}</h5>     
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> 
+                
+        </div>
+    </body>
+    
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+    {% include 'footer.html' %}
+    
+    {% endblock content  %}
+
+</html>
