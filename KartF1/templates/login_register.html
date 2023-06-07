@@ -10,46 +10,74 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/prueba.css' %}">
+    <style>
 
+        .card {
+            color: white;
+            width: 400px;
+            padding: 30px;
+            background-color: #2c3e50;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+        }
+      
+        .card input {
+            font-size: 25px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+      
+        .card p {
+            font-size: 20px;
+            color: white;
+        }
+    </style>
 
-    {% if page == 'login' %}
-    <div>
-        <form method="POST" action="">
-            {% csrf_token %}
+    <body>
+        {% if page == 'login' %}
+            <div class = "card text-uppercase">
+                <form method="POST" action="">
+                    {% csrf_token %}
 
-            <label>Username:</label>
-            <input type="text" name="username" placeholder="Username" />
+                    <label>Username:</label>
+                    <input type="text" name="username" placeholder="Username" />
 
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="Pwd"/>
+                    <label>Password:</label>
+                    <input type="password" name="password" placeholder="Pwd"/>
 
-            <input type="submit" value="Login" />
-        </form>
+                    <input class="btn btn-primary btn-xl" type="submit" value="Login" />
+                </form>
 
-        <p>Havent signed up yet?</p>
-        <a href={% url 'register' %}>Sign up</a>
+                <p>Haven't signed up yet?</p>
+                <a href={% url 'register' %}>Sign up</a>
 
-    </div>
+            </div>
 
-    {% else %}
+        {% else %}
 
-    <div>
-        <form method="POST" action="">
-            {% csrf_token %}
-            {{form.as_p}}
-            <!-- <label>Username:</label>
-            <input type="text" name="username" placeholder="Username" />
+        <div class ='card text-uppercase text-center'>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <!-- <label>Username:</label>
+                <input type="text" name="username" placeholder="Username" />
 
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="Pwd"/> -->
+                <label>Password:</label>
+                <input type="password" name="password" placeholder="Pwd"/> -->
 
-            <input type="submit" value="Register" />
-        </form>
+                <input class="btn btn-primary btn-xl" type="submit" value="Register" />
+            </form>
 
-        <p>Already signed up?</p>
-        <a href={% url 'login' %}>Login</a>
+            <p>Already signed up?</p>
+            <a href={% url 'login' %}>Login</a>
 
-    </div>
+        </div>
+    </body>
+
     {% endif %}
 
     <!-- Bootstrap core JS-->

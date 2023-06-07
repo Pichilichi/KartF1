@@ -11053,12 +11053,14 @@ html {
   border-radius: 25px;
   padding-left: 2rem;
   padding-right: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .circuit {
   border: 2px solid #2c3e50;
   border: 2px solid #2c3e50;
   background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .textitoblack{
