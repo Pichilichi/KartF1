@@ -6,7 +6,9 @@
                 <section class="page-section portfolio" id="portfolio">
                     <div class="container">
                         <!-- NAME - CIRCUIT+CATEGORY - CAR - THE USER -->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{booking.name}}</h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
+                            <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a>
+                        </h2>
                         <h6 class="page-section-heading-circuit text-center text-uppercase text-secondary mb-0">-{{booking.circuit.name}} - {{booking.circuit.category}}-</h6>
                         <!-- THE CAR WORKS AS A DIVISION -->
                         <div class="divider-custom">
