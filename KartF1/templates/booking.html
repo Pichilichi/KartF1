@@ -1,59 +1,80 @@
-{% extends 'main.html' %}
+<!DOCTYPE html>
+<html>
+    {% extends 'main.html' %}
 
-{% block content %}
+    {% load static %}
 
-<style>
-    .booking-container{
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-    }
-</style>
+    {% block content %}
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/prueba.css' %}">
+    <style>
+        .booking-container{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+    </style>
 
-<div class="booking-container">
+    <div class="booking-container">
 
-    <div>
-    
-        <h1> Booking: {{booking.name}} </h1>  
+        <div>
+        
+            <h1> Booking: {{booking.name}} </h1>  
 
-        <p> Race day: {{booking.raceDay}} </p>
+            <p> Race day: {{booking.raceDay}} </p>
 
-        <div class="comment-wrapper"> 
-            <h3>Convo</h3>
+            <div class="comment-wrapper"> 
+                <h3>Convo</h3>
+                <hr>
+
+                {% for message in booking_messages %}
+                <div>
+                    {% if request.user == message.user %}
+                    <a href="{% url 'delete-message' message.id %}">Delete</a>
+                    {% endif %}
+                    <small>{{message.user}} {{message.created|timesince}} ago</small>
+                    <p>{{message.body}}</p>
+                    <hr>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if request.user.is_authenticated %}
+            <div class="comment-form">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="body" placeholder="Say something!"/>
+                </form>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div>
+            <h3>Racers</h3>
             <hr>
 
-            {% for message in booking_messages %}
+            {% for user in racers %}
             <div>
-                {% if request.user == message.user %}
-                <a href="{% url 'delete-message' message.id %}">Delete</a>
-                {% endif %}
-                <small>{{message.user}} {{message.created|timesince}} ago</small>
-                <p>{{message.body}}</p>
-                <hr>
+                <p>{{user.username}}</p>
             </div>
             {% endfor %}
         </div>
 
-        {% if request.user.is_authenticated %}
-        <div class="comment-form">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <input type="text" name="body" placeholder="Say something!"/>
-            </form>
-        </div>
-        {% endif %}
-
     </div>
+    
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-    <div>
-        <h3>Racers</h3>
-        <hr>
+    {% endblock content  %}
 
-        {% for user in racers %}
-        <div>
-            <p>{{user.username}}</p>
-        </div>
-        {% endfor %}
-    </div>
-
-</div>
-{% endblock content  %}
+</html>

@@ -1,29 +1,47 @@
-{% extends 'main.html' %}
+<!DOCTYPE html>
+<html>
+    {% extends 'main.html' %}
 
-{% block content %}
+    {% load static %}
 
-<style>
-    .profile-container {
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;  
-    }
-</style>
+    {% block content %}
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/prueba.css' %}">
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;  
+        }
+    </style>
 
-<h1>{{user.username}}</h1>
+    <h1>{{user.username}}</h1>
 
-<div class="profile-container">
-    <div>
-        {% include 'circuit_component.html' %}
+    <div class="profile-container">
+        <div>
+            {% include 'circuit_component.html' %}
+        </div>
+
+        <div>
+            {% include 'booking_component.html' %}
+        </div>
+
+        <div>
+            {% include 'activity_component.html' %}
+        </div>
+
     </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-    <div>
-        {% include 'booking_component.html' %}
-    </div>
-
-    <div>
-        {% include 'activity_component.html' %}
-    </div>
-
-</div>
-
-{% endblock content %}
+    {% endblock content %}
+</html>
