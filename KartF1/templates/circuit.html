@@ -17,7 +17,8 @@
     <body>
         <div class="booking-container">
 
-            {% for circuit in circuits %}
+            {% comment %} {% for circuit in circuits %}
+
             <div>
                 <div>
                     <div>
@@ -37,25 +38,30 @@
                                 <h5 class="page-section-heading-user text-center text-uppercase text-secondary mb-0"> 
                                     <a href="{% url 'home' %}"> {{circuit.body}}</a>
                                 </h5>
-                                
-                                <!-- BOOKINGS GRID -->
-                                <div class="row justify-content-center">
-                                    <!-- THE BOOKINGS APPEARS HERE -->
-                                    <div class="col-md-6 col-lg-4 mb-5">
-                                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                                            </div>
-                                            {% comment %} <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." /> {% endcomment %}
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </section>
                     </div>
                 </div>        
             </div>
-            {% endfor %}
+
+            {% endfor %} {% endcomment %}
+
+            
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for circuit in circuits %}
+                <div class="col">
+                    <div class="card">
+                        <img class="card-img-top" src={{circuit.photo.url}} alt="imagen">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase mb-0">{{circuit.name}}</h5>
+                            <p class="card-text text-center ">{{circuit.body}}</p>
+                            <p class="card-text"><small class="text-muted">{{circuit.km}}km | {{circuit.category}}</small></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> 
+                
         </div>
     </body>
     

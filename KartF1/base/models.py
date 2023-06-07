@@ -39,7 +39,7 @@ class Category(models.Model):
      
 class Circuit(models.Model):
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="static/images/cars") 
+    photo = models.ImageField(upload_to="static/images/circuits") 
     year = models.DateField()
     km = models.CharField(max_length=255)
     body = models.TextField()
