@@ -48,7 +48,7 @@ class Circuit(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-            return self.body[0:50]
+            return self.name
 
 class Equipment(models.Model):
     name = models.CharField(max_length=255)
