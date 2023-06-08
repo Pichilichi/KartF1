@@ -17,14 +17,16 @@
         }
     </style>
 
-    <h1>{{user.username}}</h1>
-
     <div class="profile-container">
         <div>
             {% include 'circuit_component.html' %}
         </div>
 
         <div>
+            <ul class="navbar-nav ms-auto text-center">
+                <p class="masthead-subheading font-weight-light mb-4 "><h5 class="text-uppercase">{{user.username}}</h5> 
+                {% comment %} <a class="btn btn-outline-light btn-social mx-1" href="{% url 'create-booking' %}">Create booking</a></p> {% endcomment %}
+            </ul>
             {% include 'booking_component.html' %}
         </div>
 
