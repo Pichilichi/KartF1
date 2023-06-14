@@ -15,51 +15,22 @@
 
     
     <body>
-        <div class="booking-container">
-
-            {% comment %} {% for circuit in circuits %}
-
-            <div>
-                <div>
-                    <div>
-                        <section class="page-section portfolio" id="portfolio">
-                            <div class="container">
-                                <!-- NAME - CIRCUIT+CATEGORY - CAR - THE USER -->
-                                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
-                                    <a href="{% url 'home' %}"> {{circuit.name}} </a>
-                                </h2>
-                                <h6 class="page-section-heading-circuit text-center text-uppercase text-secondary mb-0">-{{circuit.km}}km - {{circuit.category}}-</h6>
-                                <!-- THE CAR WORKS AS A DIVISION -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-car-on"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <h5 class="page-section-heading-user text-center text-uppercase text-secondary mb-0"> 
-                                    <a href="{% url 'home' %}"> {{circuit.body}}</a>
-                                </h5>
-                            </div>
-                        </section>
-                    </div>
-                </div>        
-            </div>
-
-            {% endfor %} {% endcomment %}
-
-            
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="card-deck">
+            <div class="row row-cols-1 row-cols-md-3 gy-3">
                 {% for eq in equipments %}
-                <div class="col">
-                    <div class="card">
-                        <img class="card-img-top" src={{eq.photo.url}} alt="imagen">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src={{eq.photo.url}} alt="imagen" >
                         <div class="card-body">
                             <h5 class="card-title text-center text-uppercase mb-0">{{eq.name}}</h5>     
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">{{eq.equipment_category}}</small>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-            </div> 
-                
+            </div>       
         </div>
     </body>
     
