@@ -103,3 +103,16 @@ class Message(models.Model):
     
     class Meta:
         ordering = ['-updated', '-created']
+
+class Weather(models.Model):
+    name = models.CharField(max_length=255) 
+    photo = models.ImageField(upload_to="static/images/forecast") 
+    tempMin = models.IntegerField()
+    tempMax = models.IntegerField()
+    circuit = models.ForeignKey(Circuit, on_delete=models.CASCADE)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+            return self.name
