@@ -9,10 +9,12 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import BookingForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def home(request):
     page = 'home'
     q = request.GET.get('q') if request.GET.get('q') != None else ''
+    
 
     bookings = Booking.objects.filter(Q(circuit__name__icontains=q) |
     Q(name__icontains=q) | Q(user__username__icontains=q))
@@ -20,10 +22,14 @@ def home(request):
     circuits = Circuit.objects.all()
     booking_count = bookings.count()
     booking_messages = Message.objects.filter(Q(booking__circuit__name__icontains=q))
+    booking_paginator = Paginator(bookings, 3)
+    
+    page_number = request.GET.get("page")
+    page_obj = booking_paginator.get_page(page_number)
 
     context = {'bookings': bookings, 'circuits': circuits, 
     'booking_count': booking_count, 'booking_messages': booking_messages,
-    'page' : page}
+    'page' : page, "page_obj": page_obj}
     return render(request, 'home.html', context)
 
 @login_required(login_url='login')

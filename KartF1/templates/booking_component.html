@@ -1,10 +1,12 @@
         <div>
 
-            {% for booking in bookings %}
+            {% for booking in page_obj %}
 
             <div>
+                
                 <section class="page-section portfolio" id="portfolio">
                     <div class="container">
+                       
                         <!-- NAME - CIRCUIT+CATEGORY - CAR - THE USER -->
                         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
                             <a href="{% url 'booking' booking.id %}"> {{booking.name}} </a>
@@ -35,11 +37,33 @@
                     </div>
                 </section>
                
-                
             </div>
-
+            
             {% endfor %}
 
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">First</a>
+                    </li>
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }} ">Previous</a>
+                    </li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                    </li>
+                </ul>
+                
+            </nav>
+            
+            
             
 
         </div>
