@@ -19,6 +19,7 @@ from django.contrib.auth.models import User
 # email = campo del email por si se puede hacer uno en plan “te has registrado!”	
 # cosa que debería estar en el proyecto del mac btw
 
+# NO SE USA
 class Kart(models.Model):
     name = models.CharField(max_length=255)
     photo = models.ImageField(upload_to="static/images/cars") 
