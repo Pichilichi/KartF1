@@ -56,23 +56,50 @@ class Equipment(models.Model):
     HELMET = "HM"
     RACESUIT = "RS"
     GLOVES = "GL"
+    KART = "KR"
     EQUIPMENT_CHOICES = [
         (HELMET, "Helmet"),
        	(RACESUIT, "RaceSuit"),
         (GLOVES, "Gloves"), 
+        (KART, "Kart"),
     ]
     equipment_category = models.CharField(
        	max_length=2,
         choices=EQUIPMENT_CHOICES,
         default=HELMET,
     )
+    price = models.FloatField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
             return self.name
+        
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    ordered = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False, null=True, blank=False)
+    transaction_id = models.CharField(max_length=255, null=True)
+    
+    def __str__(self):
+         return str(self.id)
 
-# class Ranking(models.Model):
+class OrderItem(models.Model):
+    product = models.ForeignKey(Equipment, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    added = models.DateTimeField(auto_now_add=True)
+    
+class ShippingAdress(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    address = models.CharField(max_length=255, null=False)
+    city = models.CharField(max_length=255, null=False)
+    cp = models.IntegerField(null=False)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+            return self.address
 	
 class Booking(models.Model): 
     name = models.CharField(max_length=255) 

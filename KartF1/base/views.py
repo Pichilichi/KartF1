@@ -22,8 +22,8 @@ def home(request):
     circuits = Circuit.objects.all()
     booking_count = bookings.count()
     booking_messages = Message.objects.filter(Q(booking__circuit__name__icontains=q))
-    booking_paginator = Paginator(bookings, 3)
     
+    booking_paginator = Paginator(bookings, 3)
     page_number = request.GET.get("page")
     page_obj = booking_paginator.get_page(page_number)
 
@@ -80,9 +80,14 @@ def userProfile(request, pk):
     user = User.objects.get(id=pk)
     bookings = user.booking_set.all()
     booking_messages = user.message_set.all()
+    
+    booking_paginator = Paginator(bookings, 3)
+    page_number = request.GET.get("page")
+    page_obj = booking_paginator.get_page(page_number)
+    
     circuits = Circuit.objects.all()
     context = {'user': user, 'bookings':bookings,
-    'booking_messages': booking_messages, 'circuits': circuits }
+    'booking_messages': booking_messages, 'circuits': circuits, "page_obj": page_obj }
     return render(request, 'profile.html', context)
 
 @login_required(login_url='login')
